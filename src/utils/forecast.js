@@ -9,11 +9,12 @@ const forecast = (location, lat, lon, callback) => {
     lon +
     "&units=f";
   request({ url, json: true }, (error, response, { current }) => {
-    const { weather_descriptions, temperature, feelslike } = current;
+    const { weather_descriptions, temperature, feelslike, wind_speed, wind_dir  } = current;
     if (error) {
       console.log("Unable to connect to weatherstack service!");
     } else {
-        forecastSummary = "The weather in " + location + " is " + weather_descriptions[0] + " and the temperature is " + temperature + " though it feels like " + feelslike +"."
+        forecastSummary = "The weather in " + location + " is " + weather_descriptions[0] + 
+        ", the temperature is " + temperature + " though it feels like " + feelslike +", and the wind speed is " + wind_speed + " mph coming out of the " + wind_dir + "."
         callback(undefined, {forecastSummary});
     }
   });
